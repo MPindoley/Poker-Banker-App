@@ -1,11 +1,13 @@
 // Offline cache so the app works at a table with bad signal.
-const CACHE = 'poker-banker-v1';
+const CACHE = 'poker-banker-v2';
 const ASSETS = [
   './',
   'index.html',
   'css/styles.css',
   'js/app.js',
   'js/ledger.js',
+  'js/store.js',
+  'js/venmo.js',
   'manifest.webmanifest',
   'icons/icon.svg',
   'icons/icon-192.png',

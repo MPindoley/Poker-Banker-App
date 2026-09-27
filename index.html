@@ -22,14 +22,11 @@
 
   <main id="view"></main>
 
-  <nav id="tabs" class="tabs" hidden>
-    <button data-tab="players" class="active">Players</button>
-    <button data-tab="log">Log</button>
-    <button data-tab="settle">Settle</button>
-  </nav>
+  <nav id="tabs" class="tabs"></nav>
 
   <dialog id="modal"><form method="dialog" id="modal-body"></form></dialog>
   <div id="toast" role="status" aria-live="polite"></div>
+  <input type="file" id="import-file" accept="application/json,.json" hidden />
 
   <script type="module" src="js/app.js"></script>
 </body>

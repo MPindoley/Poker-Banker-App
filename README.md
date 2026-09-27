@@ -6,14 +6,26 @@ It is a Progressive Web App: plain HTML/JS, no install from an app store, works 
 
 ## What it does
 
-- **Games** – start a game with a name and a standard buy-in (quick buttons for ½×, 1×, 2×, or any amount).
+**At the table**
+- **Games** – start a game with a standard buy-in and optional starting cash ("float") you bring for making change.
+- **Regulars** – everyone you've played with is one tap to add. Their Venmo username is saved.
 - **Buy-ins & rebuys** – record how each player paid: **Cash**, **Venmo / App**, or **IOU**.
-- **Cash-outs** – enter the chips a player leaves with. The app subtracts any IOU they owe, tells you exactly what to pay them, and shows their result for the night.
-- **Live bank** – "On the table" total, plus a breakdown of cash in hand, digital money received and IOUs outstanding. A check confirms the bank always balances with the chips in play.
-- **Chip count check** – count the chips on the table and the app tells you whether anything is missing.
-- **Standings & IOUs** – who's up, who's down, who still owes you; record IOU repayments.
+- **Cash-outs** – type the chip amount or **count stacks by color**. The app subtracts any IOU, tells you exactly what to pay, and warns if you don't have enough cash. Pick Venmo and it opens Venmo with the amount and note filled in.
+- **Live bank** – "On the table" total, plus cash in hand, Venmo net and IOUs owed, with a check that the bank balances with the chips in play.
+- **Screen stays on** during a live game.
 - **Log + undo** – every transaction is timestamped; undo right away or delete any entry later.
-- **Share summary** – send the night's results to the group chat.
+
+**End of the night**
+- **Cash out remaining players** – walks you through everyone still seated, one after another.
+- **Count the cash** – shows what should be in your hand (including float) and checks your count.
+- **Count the chips** – checks the chips left on the table, by dollar amount or by color.
+- **Standings, IOUs and a shareable summary** for the group chat.
+
+**Between games**
+- **Owed to the bank** – unpaid IOUs from any game stay on the home screen, with a Venmo request button, until marked paid.
+- **Leaderboard** – each regular's all-time result, games played, nights up and best night.
+- **Backup & import** – save a backup file to iCloud/Drive or text it to yourself; import merges it on a new phone.
+- **Chip values** – set your own chip colors and values in Settings.
 
 ## Using it on your phone
 
@@ -29,36 +41,21 @@ Data lives only on that phone (browser storage), so use the same phone as the ba
 
 ```sh
 npm start   # serves on http://localhost:8080
-npm test    # runs the money-math tests
+npm test    # runs the logic tests
 ```
 
 - `js/ledger.js` – all the money math (pure functions, amounts in cents)
-- `js/app.js` – screens, modals and storage
+- `js/store.js` – saved-data shape, upgrades between versions, backup merging
+- `js/venmo.js` – Venmo pay/request links
+- `js/app.js` – screens, modals, wake lock
 - `sw.js` – offline cache (bump `CACHE` when you change files)
 
 ## Ideas for next steps
 
-**Money & settling up**
-- End-of-night "who pays whom" list that settles Venmo debts between players with the fewest payments
-- Venmo / Cash App deep links with the amount pre-filled
-- Chip denominations: set the chip values and count stacks by color instead of adding up dollars
-- A "bank float" field for starting cash you bring before anyone buys in
-- Tips / rake / food kitty taken out of the pot
-- Buy-in limits and rebuy caps, plus a warning when someone is way over
-
-**Players & history**
-- Saved player list so regulars are one tap to add
-- Lifetime stats per player: nights played, total won or lost, biggest win
-- Running IOU balances that carry over from one game to the next
-- Leaderboards and a season view
-
-**Game night extras**
-- Tournament mode with a blind timer, levels and payout percentages
-- Seat and dealer tracking
-- Photo of the final chip count attached to the game
-
-**Trust & backup**
-- Export and import (CSV/JSON) and cloud backup so a lost phone doesn't lose the history
-- Shared, read-only live view so players can check the bank from their own phones
-- A second banker/co-host who can make entries too
-- PIN lock so nobody else edits the bank
+- Shared live view so players can check the bank from their own phones (needs a small backend)
+- Co-banker who can make entries from a second phone
+- Tournament mode: blind timer, levels, payout percentages
+- Food / kitty expenses split across players
+- Rebuy caps and "way over" warnings
+- Season view and year-end awards
+- PIN lock

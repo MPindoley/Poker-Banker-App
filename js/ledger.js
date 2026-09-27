@@ -104,9 +104,59 @@ export function planCashOut(game, playerId, chipsCents) {
   };
 }
 
-// Final standings, sorted biggest winner first.
+// A player has left if their latest buy-in/cash-out was a cash-out.
+export function isOut(game, playerId) {
+  for (let i = game.transactions.length - 1; i >= 0; i--) {
+    const t = game.transactions[i];
+    if (t.playerId !== playerId) continue;
+    if (t.type === 'cashout') return true;
+    if (t.type === 'buyin') return false;
+  }
+  return false;
+}
+
+// Final standings, sorted biggest winner first; players still at the table go last.
 export function standings(game) {
   return game.players
-    .map((p) => ({ player: p, ...playerStats(game, p.id) }))
-    .sort((a, b) => b.net - a.net);
+    .map((p) => ({ player: p, out: isOut(game, p.id), ...playerStats(game, p.id) }))
+    .sort((a, b) => b.out - a.out || b.net - a.net);
+}
+
+// Every unpaid IOU across all games, biggest first.
+export function outstandingIous(games) {
+  const list = [];
+  for (const game of games) {
+    for (const p of game.players) {
+      const { iouOwed } = playerStats(game, p.id);
+      if (iouOwed > 0) list.push({ game, player: p, amount: iouOwed });
+    }
+  }
+  return list.sort((a, b) => b.amount - a.amount);
+}
+
+// Career numbers per player id. Only counts nights a player finished (cashed out).
+export function lifetimeStats(games) {
+  const by = {};
+  for (const game of games) {
+    for (const p of game.players) {
+      const s = playerStats(game, p.id);
+      if (!s.buyIns) continue;
+      const row = (by[p.id] ||= { games: 0, finished: 0, wins: 0, buyIn: 0, net: 0, best: 0, worst: 0, iouOwed: 0 });
+      row.games++;
+      row.iouOwed += s.iouOwed;
+      if (!isOut(game, p.id)) continue;
+      row.finished++;
+      row.buyIn += s.buyIn;
+      row.net += s.net;
+      if (s.net > 0) row.wins++;
+      row.best = Math.max(row.best, s.net);
+      row.worst = Math.min(row.worst, s.net);
+    }
+  }
+  return by;
+}
+
+// Dollar value of a stack counted by chip color. counts[i] matches chips[i].
+export function chipTotal(chips, counts) {
+  return chips.reduce((sum, c, i) => sum + c.value * (Number(counts[i]) || 0), 0);
 }

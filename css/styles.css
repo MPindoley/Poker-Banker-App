@@ -215,3 +215,50 @@ dialog::backdrop { background: rgba(0,0,0,.6); }
 }
 #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
 #toast button { background: none; border: 0; color: #1f7a4d; font-weight: 800; padding: 0; }
+
+/* ---- v2 additions ---- */
+.small { font-size: 13px; }
+.center { text-align: center; }
+.gold { color: var(--gold); font-weight: 700; }
+.big { font-size: 18px; font-weight: 800; }
+.mt { margin-top: 12px; }
+.mt-s { margin-top: 8px; }
+.hint { font-size: 12px; color: var(--muted); margin-top: 6px; }
+.warn { color: var(--warn); }
+.pre { white-space: pre-wrap; font: inherit; }
+a.btn { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; color: var(--text); }
+
+.notice { border-color: var(--warn); cursor: pointer; margin-top: 12px; }
+.notice b { color: var(--warn); }
+.badge.live { background: rgba(74,222,128,.15); color: var(--win); }
+.rank { width: 26px; text-align: center; font-weight: 800; color: var(--muted); }
+.log-item .btn.small { flex: 0 0 auto; }
+
+.quick-add { display: flex; flex-wrap: wrap; gap: 8px; margin: -2px 0 14px; }
+.quick-add button {
+  border: 1px dashed var(--line);
+  background: transparent;
+  border-radius: 99px;
+  padding: 8px 12px;
+  font-weight: 600;
+  color: var(--muted);
+}
+.quick-add button:active { background: var(--card-2); color: var(--text); }
+
+.chip-edit { display: grid; grid-template-columns: 44px 1fr 88px 36px; gap: 8px; align-items: center; margin-top: 10px; }
+.chip-edit input[type=color] { width: 44px; height: 44px; padding: 0; border: 1px solid var(--line); border-radius: 50%; background: none; overflow: hidden; }
+.chip-edit input[type=color]::-webkit-color-swatch-wrapper { padding: 0; }
+.chip-edit input[type=color]::-webkit-color-swatch { border: 0; border-radius: 50%; }
+.del { background: none; border: 0; color: var(--muted); font-size: 20px; width: 36px; height: 36px; }
+
+.toggle { display: flex; align-items: center; gap: 10px; }
+.toggle input { width: 22px; height: 22px; accent-color: var(--gold); }
+
+.chip-counter { margin-top: 10px; }
+.chip-counter summary { color: var(--gold); font-weight: 600; font-size: 14px; cursor: pointer; padding: 4px 0; }
+.chip-line { display: grid; grid-template-columns: 22px 1fr 40px 64px 40px; gap: 8px; align-items: center; margin-top: 8px; }
+.chip-line .swatch { width: 22px; height: 22px; border-radius: 50%; border: 3px dashed rgba(255,255,255,.55); }
+.chip-line .chip-label { font-size: 14px; }
+.chip-line button { height: 40px; border-radius: 10px; border: 1px solid var(--line); background: var(--card-2); font-size: 20px; font-weight: 700; }
+.chip-line input { min-height: 40px; padding: 6px; text-align: center; }
+dialog { overflow-y: auto; }
