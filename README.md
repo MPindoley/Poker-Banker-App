@@ -29,13 +29,15 @@ It is a Progressive Web App: plain HTML/JS, no install from an app store, works 
 
 ## Using it on your phone
 
-The app must be served over HTTPS for "Add to Home Screen" and offline mode. The easiest free option is GitHub Pages:
+The app is hosted free on GitHub Pages: **https://mpindoley.github.io/Poker-Banker-App/**
 
-1. On GitHub: **Settings → Pages → Build and deployment → Deploy from a branch**, pick `main` and `/ (root)`.
-2. Open `https://<your-username>.github.io/Poker-Banker-App/` on your phone.
-3. iPhone: Share → **Add to Home Screen**. Android: ⋮ menu → **Install app**.
+1. Open that link on your phone.
+2. iPhone (Safari): Share → **Add to Home Screen**. Android (Chrome): ⋮ menu → **Install app**.
+3. Launch it from the home screen icon — it works offline after the first load.
 
-Data lives only on that phone (browser storage), so use the same phone as the banker each night.
+Every change merged to `main` is published automatically within a minute or two. (One-time setup: repo **Settings → Pages → Deploy from a branch → `main` / `(root)`**.)
+
+Data lives only on that phone (browser storage), so use the same phone as the banker each night and use **Settings → Save backup** now and then.
 
 ## Development
 
